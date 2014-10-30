@@ -65,6 +65,10 @@ module.exports = function(grunt) {
             }
 
             var data = options.includeInfo ? { rows: rows, info: info } : rows;
+          
+            if (options.transformData) {
+                data = options.transformData();
+            }
 
             grunt.file.write(filename, options.prettify ? JSON.stringify(data, null, 2) : JSON.stringify(data));
             grunt.log.writeln('Spreadsheet data written to "' + filename + '".');
